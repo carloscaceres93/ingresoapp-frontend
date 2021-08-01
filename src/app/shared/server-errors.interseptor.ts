@@ -26,10 +26,10 @@ export class ServerErrorsInterceptor implements HttpInterceptor {
 
                 if (err.status === 400) {
                     console.log(err);
-                    this.snackBar.open(err.mensaje, 'ERROR 400', { duration: 5000 });
+                    this.snackBar.open(err.error.mensaje, 'ERROR 400', { duration: 5000 });
                 }
                 else if (err.status === 404){
-                    this.snackBar.open(err.mensaje, 'ERROR 404', { duration: 5000 });
+                    this.snackBar.open(err.error.mensaje, 'ERROR 404', { duration: 5000 });
                 }
                 else if (err.status === 500) {
                     this.snackBar.open(err.error.mensaje, 'ERROR 500', { duration: 5000 });
