@@ -1,0 +1,78 @@
+<h2 mat-dialog-title class="text-center mt-2" *ngIf= "data.id == 0">Registrar</h2>
+<h2 mat-dialog-title class="text-center mt-2" *ngIf= "data.id != 0">Actualizar</h2>
+
+<mat-dialog-content class="row">
+
+  <form class="row" [formGroup]="formEmpleado" #frmEmpleado="ngForm" (ngSubmit)="operar()">
+    <div [hidden]="true">
+        <mat-form-field appearance="outline">
+            <input matInput placeholder="ID" formControlName="id">
+        </mat-form-field>
+    </div>
+
+      <mat-form-field  appearance="outline" class="col-md-6">
+        <mat-label>Primer Apellido</mat-label>
+        <input matInput placeholder="Primer Apellido"  formControlName="primerApellido" type="text" required>
+    </mat-form-field>
+
+      <mat-form-field  appearance="outline" class="col-md-6">
+        <mat-label>Segundo Apellido</mat-label>
+        <input matInput placeholder="Segundo Apellido" formControlName="segundoApellido" type="text" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="col-md-6">
+        <mat-label>Primer Nombre</mat-label>
+        <input matInput placeholder="Primer Nombre" formControlName="primerNombre"  type="text" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="col-md-6">
+      <mat-label>Otro Nombre</mat-label>
+      <input matInput placeholder="Opcional" formControlName="otroNombre"  type="text">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="col-md-6">
+      <mat-label>tipo Identificacio</mat-label>
+      <mat-select placeholder="tipo Identificacion" formControlName="tipoIdentificacion" appearance="outline">
+          <mat-option *ngFor="let t of (tiposidentificacion$ | async)" [value]="t.id">
+              {{ t.nombre }} -  {{ t.descripcion }}
+          </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="col-md-6">
+      <mat-label>Numero Identificacion</mat-label>
+      <input matInput placeholder="Numero Identificacion" formControlName="numeroIdentificacion" type="text" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="col-md-6">
+      <mat-label>Area</mat-label>
+      <mat-select placeholder="Area" formControlName="area">
+          <mat-option *ngFor="let a of (areas$ | async)" [value]="a.id">
+            {{ a.nombre }}
+          </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="col-md-6">
+      <mat-label>Pais</mat-label>
+      <mat-select placeholder="Pais" formControlName="pais">
+        <mat-option *ngFor="let p of (paises$ | async)" [value]="p.id">
+          {{p.abreviatura }} - {{ p.nombre }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="col-md-6">
+      <mat-label>Fecha Ingreso</mat-label>
+      <input matInput [matDatepicker]="picker" placeholder="Fecha de Registro" formControlName="fechaIngreso">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+</form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="center">
+  <button mat-dialog-close class = "btn btn_danger">Cancelar</button>
+  <button class = "btn btn-primary" *ngIf= "data.id == 0" (click)= "operar()" [disabled]="frmEmpleado.invalid">Guardar</button>
+  <button class = "btn btn-success" *ngIf= "data.id != 0" (click)= "operar()" [disabled]="frmEmpleado.invalid">Actualizar</button>
+</mat-dialog-actions>
