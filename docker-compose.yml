@@ -1,0 +1,14 @@
+version: '3'
+services:
+  ingresoapp-frontend:
+    image: ingresoapp-frontend
+    container_name: ingresoapp-frontend
+    build:
+      context: ./
+    ports:
+    - "8290:80"
+    networks:
+    - network_cidenet
+networks:
+  network_cidenet:
+     external: true
