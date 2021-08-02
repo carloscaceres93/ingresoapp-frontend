@@ -99,4 +99,8 @@ export class EmpleadosComponent implements OnInit {
     })
   }
 
+  applyFilter(param: string){{
+      this.dataSource.filter = param.trim().toLowerCase();
+    }
+  }
 }

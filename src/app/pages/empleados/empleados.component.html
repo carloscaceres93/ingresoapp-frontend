@@ -1,6 +1,11 @@
 <h1>Lista Empleados</h1>
 
-<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 mt-5">
+<mat-form-field>
+  <mat-label>Buscar Empleado</mat-label>
+  <input matInput matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar empleado" #input>
+</mat-form-field>
+
+<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
 
   <ng-container matColumnDef="identificacion">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> DNI </th>
